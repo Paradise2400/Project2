@@ -2,35 +2,35 @@ import java.util.Arrays;
 import java.util.EmptyStackException;
 
 /**
-    A class of stacks whose entries are stored in an array.
-    @author Frank M. Carrano and Timothy M. Henry
-    @version 5.0
-*/
+ A class of stacks whose entries are stored in an array.
+ @author Frank M. Carrano and Timothy M. Henry
+ @version 5.0
+ */
 public final class ResizableArrayStack<T> implements StackInterface<T>
 {
-	private T[] stack;    // Array of stack entries
-	private int topIndex; // Index of top entry
-   private boolean integrityOK = false;
-	private static final int DEFAULT_CAPACITY = 50;
-	private static final int MAX_CAPACITY = 10000;
-  
-   public ResizableArrayStack()
-   {
-      this(DEFAULT_CAPACITY);
-   } // end default constructor
-  
-   public ResizableArrayStack(int initialCapacity)
-   {
-      integrityOK = false;
-      checkCapacity(initialCapacity);
-      
-      // The cast is safe because the new array contains null entries
-      @SuppressWarnings("unchecked")
-      T[] tempStack = (T[])new Object[initialCapacity];
-      stack = tempStack;
-		topIndex = -1;
-      integrityOK = true;
-  } // end constructor
+    private T[] stack;    // Array of stack entries
+    private int topIndex; // Index of top entry
+    private boolean integrityOK = false;
+    private static final int DEFAULT_CAPACITY = 50;
+    private static final int MAX_CAPACITY = 10000;
+
+    public ResizableArrayStack()
+    {
+        this(DEFAULT_CAPACITY);
+    } // end default constructor
+
+    public ResizableArrayStack(int initialCapacity)
+    {
+        integrityOK = false;
+        checkCapacity(initialCapacity);
+
+        // The cast is safe because the new array contains null entries
+        @SuppressWarnings("unchecked")
+        T[] tempStack = (T[])new Object[initialCapacity];
+        stack = tempStack;
+        topIndex = -1;
+        integrityOK = true;
+    } // end constructor
     private void checkIntegrity() {
         if (!integrityOK)
             throw new SecurityException("ArrayBag object is corrupt.");
@@ -91,7 +91,8 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
     public int evaluatePostfix(String input) {
         StackInterface<Integer> valueStack = new ResizableArrayStack<>(input.length());
         for(int i = 0; i < input.length(); i++){
-            char variable = input.charAt(i);
+            String input2 = input.toLowerCase();
+            char variable = input2.charAt(i);
             for(int k = 'f'; k <= 'z'; k++){
                 if(k == variable)
                     throw new IllegalStateException("Invalid input");

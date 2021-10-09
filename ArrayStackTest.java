@@ -76,4 +76,14 @@ class ArrayStackTest {
         StackInterface<Integer> testStack = new ResizableArrayStack<>();
         assertThrows(IllegalStateException.class, () -> testStack.evaluatePostfix("12+"));
         }
+
+    @org.junit.jupiter.api.Test
+    /** Test case #6 Input with uppercase
+     */
+    void evaluatePostfix8() {
+        StackInterface<Integer> testStack = new ResizableArrayStack<>();
+        testStack.push(testStack.evaluatePostfix("AE+bD-/"));
+        int test = testStack.peek();
+        assertEquals(-4, test);
+    }
     }
