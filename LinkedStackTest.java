@@ -5,9 +5,10 @@ public class LinkedStackTest {
         Scanner s = new Scanner(System.in);
         String test = "";
         while (true) {
+            System.out.print("\nEnter test input: ");
             test = s.nextLine();
             System.out.println(test +" is balanced:     " + checkBalance(test));
-            System.out.println(test +" operations work: " + checkOperators(test));
+            System.out.println(test +" operations work: " + checkOperatorsAndOperands(test));
             System.out.println(test +" in postfix:      " + convertToPostfix(test));
             }
     }
@@ -28,7 +29,8 @@ public class LinkedStackTest {
         //remove whitespace
         infix = infix.replace(" ","").replace("\n","").replace("\t","");
         //if the input has too many operators, too few, etc., throw exception
-        if (!checkOperators(infix)) throw new ArithmeticException("Attempt to pass expression with unbalanced operations through infixToPostfix method");
+        if (!checkOperatorsAndOperands(infix)) throw new ArithmeticException("Attempt to pass expression with operator or operand error through infixToPostfix method");
+        //if the 
         
         char nextChar;
         while (infix.length() > 0) {
@@ -89,29 +91,33 @@ public class LinkedStackTest {
      * @param in The string input
      * @return Whether the input's operators are balanced
     */
-    public static boolean checkOperators(String in) {
+    public static boolean checkOperatorsAndOperands(String in) {
+        //remove delimeters, should only be called after checkBalance() and replacing delimiters with the same type
+        in = in.replace("(","").replace(")","");
         //smallest acceptable expression is atleast 3 characters long
         //operand-operator-operand
+        
+        //every expression's length should be odd and greater or equal to 3
         if (in.length() < 3) return false;
-        //every expression should also be 1 plus a multiple of 2
         if ((in.length() - 1) % 2 != 0) return false;
+        
         //iterate over string
-        char prevChar = in.charAt(0);
-        char curChar = in.charAt(1);
-        char nextChar = in.charAt(2);
-        //remove delimeters, should only be called after checkBalance() and replacing delimiters with the same type
-        //first and last characters should be variables
-        if (isOperator(in.charAt(0))) return false;
-        if (isOperator(in.charAt(in.length()-1))) return false;
-        in = in.replace("(","").replace(")","");
-        for (int i = 3; i < in.length() - 1; i++) {
-            if (isOperator(curChar)) {
-                if (isOperator(prevChar) || isOperator(nextChar)) return false;
+        //pattern should be letter-operation-l-o-l-o-l-...-l-o
+        //this pattern should end and start with the same type in an odd length
+        boolean letterNotOperator = true;
+        char curChar;
+        for (int i = 0; i < in.length(); i++) {
+            curChar = in.charAt(i);
+            if (letterNotOperator) {
+                if (!Character.isLetter(curChar)) return false;
+            } else {
+                if (!isOperator(curChar)) return false;
             }
-            prevChar = curChar;
-            curChar = nextChar;
-            nextChar = in.charAt(i);
+
+            //switch expected type
+            letterNotOperator = !letterNotOperator;
         }
+
         return true;
     }
 
@@ -120,7 +126,7 @@ public class LinkedStackTest {
      * @return Whether that char is a operator
      */
     public static boolean isOperator(char in) {
-        return (in == '+' || in == '-' || in == '\\' || in == '/' || in == '*');
+        return (in == '+' || in == '-' || in == '\\' || in == '/' || in == '*' || in == '^');
     }
 
     /**Checks if an equation is balanced or not
@@ -137,7 +143,7 @@ public class LinkedStackTest {
         if (!in.contains("(") && !in.contains("{") && !in.contains("["))
             return true;
 
-        while(isBalanced == true) {
+        while(isBalanced == true && in.length() > 0) {
             nextChar = in.charAt(0);
             in = in.substring(1);
 
@@ -149,7 +155,10 @@ public class LinkedStackTest {
                     if (stack.isEmpty()) isBalanced = false;
                     else {
                         char openDelimeter = stack.pop();
-                        isBalanced = (openDelimeter == nextChar);
+                        if ((openDelimeter == '[' && nextChar == ']') || (openDelimeter == '(' && nextChar == ')') || (openDelimeter == '{' && nextChar == '}'))
+                            isBalanced = true;
+                        else
+                            isBalanced = false;
                     }
                     break;
                 default:
@@ -159,5 +168,4 @@ public class LinkedStackTest {
         isBalanced = stack.isEmpty();
         return isBalanced;
     }
-
 }
