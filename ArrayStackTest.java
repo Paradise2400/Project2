@@ -86,4 +86,16 @@ class ArrayStackTest {
         int test = testStack.peek();
         assertEquals(-4, test);
     }
+
+    @org.junit.jupiter.api.Test
+    /** Test case #6 Input with postfix expression from the project 2 description
+     */
+    void evaluatePostfix9() {
+        StackInterface<Integer> testStack = new ResizableArrayStack<>();
+        testStack.push(testStack.evaluatePostfix("ab*ca-/de*+"));
+        int test = testStack.peek();
+        assertEquals(33, test);
+        testStack.push(testStack.evaluatePostfix(null));
     }
+
+}
