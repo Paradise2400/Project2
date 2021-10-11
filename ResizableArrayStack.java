@@ -88,7 +88,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
             this.pop();
         }
     } // end clear
-    public int evaluatePostfix(String input) {
+    public static int evaluatePostfix(String input) {
         StackInterface<Integer> valueStack = new ResizableArrayStack<>(input.length());
         for(int i = 0; i < input.length(); i++){
             String input2 = input.toLowerCase();
@@ -152,6 +152,10 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
             }
         }
         return valueStack.peek();
+    }
+
+    public static String convertToPostfix(String infix) {
+        return LinkedStack.convertToPostfix(infix);
     }
 
 } // end ArrayStack
