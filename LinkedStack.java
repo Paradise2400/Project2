@@ -1,6 +1,4 @@
-import java.util.InputMismatchException;
-
-public class LinkedStack<T> implements Stack<T> {
+public class LinkedStack<T> implements StackInterface<T> {
 
     Node<T> topNode;
 

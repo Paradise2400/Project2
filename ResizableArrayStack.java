@@ -214,4 +214,8 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
         return valueStack.peek();
     }
 
+    public static String convertToPostfix(String infix) {
+        return LinkedStack.convertToPostfix(infix);
+    }
+
 } // end ArrayStack

@@ -31,5 +31,12 @@ public interface StackInterface<T>
     * @param input
     * @return Top entry of the stack */
 
-   public int evaluatePostfix(String input);
+   public static int evaluatePostfix(String input) {
+        return 0;
+   }
+
+   public static String convertToPostfix(String input) {
+       return input;
+   }
+
 } // end StackInterface
