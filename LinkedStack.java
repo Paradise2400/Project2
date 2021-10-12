@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+
 public class LinkedStack<T> implements StackInterface<T> {
 
     Node<T> topNode;
@@ -58,10 +60,26 @@ public class LinkedStack<T> implements StackInterface<T> {
         return str;
     }
 
-    /**Checks if a character is an operator
-     * @param in A char
-     * @return Whether that char is a operator
-     */
+    /**Converts operators to a single type for each 
+     * @param in Input string
+     * @return The input string with operators converted to be right
+    */
+    public static String convertOperators(String in) {
+
+        //plus
+        in = in.replace("\u002B","+").replace("\uFF0B","+")
+        //minus
+        .replace("\u2212","-").replace("\uFE63","-").replace("\uFF0D","-")
+        //multiplication
+        .replace("\u00B7","*")
+        //division
+        .replace("\\","/")
+        //exponentation
+        ;//no special chars
+
+        return in;
+    }
+
     /**Converts an infix expression as a String into a postfix expression as a String
      * @param infix The infix expression
      * @return The postfix expression
@@ -81,8 +99,10 @@ public class LinkedStack<T> implements StackInterface<T> {
         infix = infix.replace("]",")").replace("}",")").replace("[","(").replace("{","(");
         //remove whitespace
         infix = infix.replace(" ","").replace("\n","").replace("\t","");
+        //convert operators
+        infix = convertOperators(infix);
         //if the input has too many operators, too few, etc., throw exception
-//        if (!checkOperatorsAndOperands(infix)) throw new ArithmeticException("Attempt to pass expression with operator or operand error through infixToPostfix method");
+        if (!checkOperatorsAndOperands(infix)) throw new ArithmeticException("Attempt to pass expression with operator or operand error through infixToPostfix method");
         //if the
 
         char nextChar;
@@ -155,11 +175,11 @@ public class LinkedStack<T> implements StackInterface<T> {
                 replaceAll("\\s+","");
         //smallest acceptable expression is atleast 3 characters long
         //operand-operator-operand
+        
 
         //every expression's length should be odd and greater or equal to 3
         if (in.length() < 3) return false;
         if ((in.length() - 1) % 2 != 0) return false;
-
         //iterate over string
         //pattern should be letter-operation-l-o-l-o-l-...-l-o
         //this pattern should end and start with the same type in an odd length
@@ -185,7 +205,13 @@ public class LinkedStack<T> implements StackInterface<T> {
      * @return Whether that char is a operator
      */
     public static boolean isOperator(char in) {
-        return (in == '+' || in == '-' || in == '\\' || in == '/' || in == '*' || in == '^');
+        return (
+            in == '\u002B'/*Plus*/ || in == '\u2212' || //Minus
+            in == '\uFE63'/*Small Hyphen-minus*/ || in == '\u002D' || //Hyphen-minus
+            in == '\uFF0B' /*Full width plus*/|| in == '\uFF0D' || //Full width hyphen minus
+            in == '*' || in == '\u00B7'/*Dot Operator*/ ||
+            in == '^' || in =='\\' || in == '/'
+        );
     }
 
     /**Checks if an equation is balanced or not
