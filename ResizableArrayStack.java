@@ -139,7 +139,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
      * @param input String input of the postfix expression
      * @return integer calculation of the postfix expression
      */
-    public int evaluatePostfix(String input) {
+    public static int evaluatePostfix(String input) {
         if(input == null)
         {
             throw new NullPointerException("Please provide a valid String object");
