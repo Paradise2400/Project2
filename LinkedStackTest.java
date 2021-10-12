@@ -4,6 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedStackTest {
+
+    public static void main(String[] args) {
+        String parenthesesChecker = "[a * { b / ( c - d ) + e / ( f + g ) } - h ]";
+        
+        LinkedStack<String> test = new LinkedStack<String>();
+        parenthesesChecker = test.convertOperators(parenthesesChecker);
+        assertTrue(test.checkOperatorsAndOperands(parenthesesChecker));
+    }
+
     @Test
     void isOperator() {
         LinkedStack<String> test = new LinkedStack<String>();
@@ -14,7 +23,7 @@ public class LinkedStackTest {
 
     @Test
     void checkOperatorsAndOperands() {
-        String parenthesesChecker = "[a { b / ( c − d ) + e / ( f + g ) } − h ]";
+        String parenthesesChecker = "[a * { b / ( c − d ) + e / ( f + g ) } − h ]";
         LinkedStack<String> test = new LinkedStack<String>();
         assertTrue(test.checkOperatorsAndOperands(parenthesesChecker));
     }
