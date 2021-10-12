@@ -27,16 +27,4 @@ public interface StackInterface<T>
    /** Removes all entries from this stack. */
    public void clear();
 
-   /** Solve postfix expression
-    * @param input
-    * @return Top entry of the stack */
-
-   public static int evaluatePostfix(String input) {
-        return 0;
-   }
-
-   public static String convertToPostfix(String input) {
-       return input;
-   }
-
 } // end StackInterface
