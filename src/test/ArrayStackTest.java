@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import src.main.ResizableArrayStack;
+import src.main.PostfixCalc;
 
 class ArrayStackTest {
     @Test
@@ -11,7 +12,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix() {
         ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("ae+bd-/"));
+        testStack.push(PostfixCalc.evaluatePostfix("ae+bd-/"));
         int test = testStack.peek();
         assertEquals(-4, test);
     }
@@ -20,7 +21,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix2() {
         src.main.ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("abc*d*-"));
+        testStack.push(PostfixCalc.evaluatePostfix("abc*d*-"));
         int test = testStack.peek();
         assertEquals(-58, test);
     }
@@ -30,7 +31,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix3() {
         ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("abc-/d*"));
+        testStack.push(PostfixCalc.evaluatePostfix("abc-/d*"));
         int test = testStack.peek();
         assertEquals(-10, test);
     }
@@ -40,7 +41,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix4() {
         ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("ebca^*+d-"));
+        testStack.push(PostfixCalc.evaluatePostfix("ebca^*+d-"));
         int test = testStack.peek();
         assertEquals(49, test);
     }
@@ -50,7 +51,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix5() {
         ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("a e+  b d- / "));
+        testStack.push(PostfixCalc.evaluatePostfix("a e+  b d- / "));
         int test = testStack.peek();
         assertEquals(-4, test);
     }
@@ -59,14 +60,14 @@ class ArrayStackTest {
     /** Test case #6 Input with an invalid variable
      */
     void evaluatePostfix6() {
-        assertThrows(IllegalStateException.class, () -> ResizableArrayStack.evaluatePostfix("zxy+-"));
+        assertThrows(IllegalStateException.class, () -> PostfixCalc.evaluatePostfix("zxy+-"));
         }
 
     @Test
     /** Test case #7 Input with an invalid variable (number)
      */
     void evaluatePostfix7() {
-        assertThrows(IllegalStateException.class, () -> ResizableArrayStack.evaluatePostfix("12+"));
+        assertThrows(IllegalStateException.class, () -> PostfixCalc.evaluatePostfix("12+"));
         }
 
     @Test
@@ -74,7 +75,7 @@ class ArrayStackTest {
      */
     void evaluatePostfix8() {
         ResizableArrayStack<Integer> testStack = new ResizableArrayStack<>();
-        testStack.push(ResizableArrayStack.evaluatePostfix("AE+bD-/"));
+        testStack.push(PostfixCalc.evaluatePostfix("AE+bD-/"));
         int test = testStack.peek();
         assertEquals(-4, test);
     }
