@@ -1,3 +1,5 @@
+package src.main;
+
 /**
    An interface for the ADT stack.
    @author Frank M. Carrano
