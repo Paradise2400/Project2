@@ -1,12 +1,14 @@
 package src.test;
 
 import org.junit.jupiter.api.Test;
+import src.main.PostfixCalc;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-import src.main.PostfixCalc;
-
+/**
+ * A class to test the LinkedImplementations for the obtaining the postfix expressions.
+ */
 public class LinkedStackTest {
     @Test
     void isOperator() {

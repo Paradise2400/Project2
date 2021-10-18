@@ -1,20 +1,22 @@
 package src.main;
 
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.util.Scanner;
 
+/**
+ * A main class for a user input stream.
+ */
 public class Main {
 
     public static void main(String[] args) {
-        int initialCapacity = 5;
 
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         String stringInput;
-        System.out.println("Choose\n" +
-                "1 to enter a start\n" +
-                "0 to exit: \n");
+
         while (!quit) {
+            System.out.println("Choose\n" +
+                    "1 to enter a start\n" +
+                    "0 to exit: \n");
             boolean hasNextInt = scanner.hasNextInt(); //returns true if the scanner's input is an integer
             if (hasNextInt) {
                 int choice = scanner.nextInt();
@@ -63,25 +65,25 @@ public class Main {
 
 
     private static void checkBalance(String stringInput){
-        CalcPostfixEval postfixFunc = new CalcPostfixEval();
-        boolean check = postfixFunc.checkBalance(stringInput);
+        // PostfixCalc postfixFunc = new PostfixCalc();
+        boolean check = PostfixCalc.checkBalance(stringInput);
         if(check)
-            System.out.println("The expression is balanced");
+            System.out.println("The expression is balanced\n");
         else
             System.out.println("The expression is not balanced. Please try again.\n");
     }
 
     private static void calcPostfix(String stringInput)
     {
-        CalcPostfixEval postfixFunc = new CalcPostfixEval();
+        PostfixCalc postfixFunc = new PostfixCalc();
         String postfix = postfixFunc.convertToPostfix(stringInput);
         System.out.println("The postfix expression is: " + postfix + "\n");
     }
 
     private static void evalPostfix(String stringInput)
     {
-        CalcPostfixEval postfixFunc = new CalcPostfixEval();
-        int postfixVal = postfixFunc.evaluatePostfix(stringInput);
+        // PostfixCalc postfixFunc = new PostfixCalc();
+        int postfixVal = PostfixCalc.evaluatePostfix(stringInput);
         System.out.println("The value of the postfix expression is: " + postfixVal + "\n");
     }
 

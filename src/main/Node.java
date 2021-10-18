@@ -1,5 +1,7 @@
 package src.main;
-
+/**
+ * A class that is a node for the linkedStack implementation.
+ */
 public class Node<T> {
     
     Node<T> next;

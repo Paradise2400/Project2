@@ -5,8 +5,6 @@ import java.util.EmptyStackException;
 
 /**
  A class of stacks whose entries are stored in an array.
- @author Frank M. Carrano and Timothy M. Henry
- @version 5.0
  */
 public final class ResizableArrayStack<T> implements StackInterface<T>
 {

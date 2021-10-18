@@ -1,5 +1,8 @@
 package src.main;
 
+/**
+ * A class in which the entries are stored in a chain of nodes.
+ */
 public class LinkedStack<T> implements StackInterface<T> {
 
     Node<T> topNode;
