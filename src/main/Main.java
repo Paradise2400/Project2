@@ -1,4 +1,4 @@
-
+package src.main;
 
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.util.Scanner;
