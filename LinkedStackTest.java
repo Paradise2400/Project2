@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LinkedStackTest {
     @Test
     void isOperator() {
-        LinkedStack<String> test = new LinkedStack<String>();
+        CalcPostfixEval test = new CalcPostfixEval();
         assertTrue(test.isOperator('+'));
         assertFalse(test.isOperator('u'));
         assertFalse(test.isOperator(']'));
@@ -15,13 +15,13 @@ public class LinkedStackTest {
     @Test
     void checkOperatorsAndOperands() {
         String parenthesesChecker = "[a { b / ( c − d ) + e / ( f + g ) } − h ]";
-        LinkedStack<String> test = new LinkedStack<String>();
+        CalcPostfixEval test = new CalcPostfixEval();
         assertTrue(test.checkOperatorsAndOperands(parenthesesChecker));
     }
 
     @Test
     void checkBalance() {
-        LinkedStack<String> test = new LinkedStack<String>();
+        CalcPostfixEval test = new CalcPostfixEval();
         assertTrue(test.checkBalance("[a { b / ( c − d ) + e / ( f + g ) } − h ]"));
         assertFalse(test.checkBalance("{a ( b * c ) / [d + e] / f )-g}"));
         assertFalse(test.checkBalance("{a [ b + ( c + 2 ) / d ] + e ) + f"));
@@ -30,7 +30,7 @@ public class LinkedStackTest {
 
     @Test
     void convertToPostfix() {
-        LinkedStack<String> test = new LinkedStack<String>();
+        CalcPostfixEval test = new CalcPostfixEval();
         assertEquals("abc*+",test.convertToPostfix("a+b  *c"));
         assertEquals("abc^^",test.convertToPostfix("a^b^c"));
         assertEquals("ab/cde-+*",test.convertToPostfix("a / b * ( c + ( d - e ) )"));
